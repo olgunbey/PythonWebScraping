@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+from mtranslate  import translate
 # Veriyi almak için istek yap
 url = 'https://forum.donanimarsivi.com/konu/sata-ssd-oenerisi-1tb.927887/'
 response = requests.get(url)
@@ -24,7 +24,7 @@ if response.status_code == 200:
                 # blockquote içeriği hariç tut
             for blockquote in bb_wrapper.find_all('blockquote'):
                 blockquote.decompose()
-
-            print("İçerik:", bb_wrapper.get_text(strip=True))
+            icerik = translate(bb_wrapper.get_text(strip=True),"eng")
+            print("İçerik:", icerik)
 else:
     print("Sayfa yüklenirken bir hata oluştu. Hata kodu:", response.status_code)
